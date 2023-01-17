@@ -2,15 +2,12 @@ package main
 
 import (
 	"bufio"
-	"compress/gzip"
 	"flag"
+	Core "github.com/z-bool/Venom/pkg/service/impl"
+	"github.com/z-bool/Venom/pkg/service/impl/Websocket"
 	"io"
 	"log"
 	"net/http"
-	"strings"
-
-	Core "github.com/z-bool/Venom/pkg/service/impl"
-	"github.com/z-bool/Venom/pkg/service/impl/Websocket"
 )
 
 func init() {
@@ -35,20 +32,23 @@ func main() {
 	s := Core.NewProxyServer(*port, *nagle, *proxy)
 	// 注册http客户端请求事件函数
 	s.OnHttpRequestEvent = func(request *http.Request) {
-		log.Println(request)
+		// log.Println(request)
 	}
 	// 注册http服务器响应事件函数
 	s.OnHttpResponseEvent = func(response *http.Response) {
-		contentType := response.Header.Get("Content-Type")
+		// contentType := response.Header.Get("Content-Type")
 		var reader io.Reader
-		if strings.Contains(contentType, "json") {
-			reader = bufio.NewReader(response.Body)
-			if header := response.Header.Get("Content-Encoding"); header == "gzip" {
-				reader, _ = gzip.NewReader(response.Body)
-			}
-			body, _ := io.ReadAll(reader)
-			log.Println("HttpResponseEvent：" + string(body))
-		}
+		// if strings.Contains(contentType, "json") {
+		// 	reader = bufio.NewReader(response.Body)
+		// 	if header := response.Header.Get("Content-Encoding"); header == "gzip" {
+		// 		reader, _ = gzip.NewReader(response.Body)
+		// 	}
+		// 	body, _ := io.ReadAll(reader)
+		// 	log.Println("HttpResponseEvent：" + string(body))
+		// }
+		reader = bufio.NewReader(response.Body)
+		body, _ := io.ReadAll(reader)
+		log.Println(string(body))
 	}
 	// 注册socket5服务器推送消息事件函数
 	s.OnSocket5ResponseEvent = func(message []byte) {
