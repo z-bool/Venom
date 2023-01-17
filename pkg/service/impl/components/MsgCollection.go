@@ -15,28 +15,22 @@ var Result = &entity.MsgCollection{
 
 // 收集Github地址
 func collectGithubLink(githubList []string, responseBody []byte) []string {
-	githubList = utils.AddToList(githubList, utils.RegxResult(constract.GITHUB_HTTPS_REGX, responseBody))
-	githubList = utils.AddToList(githubList, utils.RegxResult(constract.GITHUB_GIT_REGX, responseBody))
-	githubList = utils.AddToList(githubList, utils.RegxResult(constract.GITEE_Https_REGX, responseBody))
-	githubList = utils.AddToList(githubList, utils.RegxResult(constract.GITEE_GIT_REGX, responseBody))
-	githubList = utils.AddToList(githubList, utils.RegxResult(constract.GITLAB_HTTPS_REGX, responseBody))
-	githubList = utils.AddToList(githubList, utils.RegxResult(constract.GITLAB_SSH_REGX, responseBody))
-	return githubList
+	return utils.RemoveDuplicateElement(utils.AddToList(githubList, utils.RegxResult(constract.GITHUB_REGX, responseBody)))
 }
 
 // 收集手机号
 func collectTelephone(telephoneList []string, responseBody []byte) []string {
-	return utils.AddToList(telephoneList, utils.RegxResult(constract.TELEPHONE_REGX, responseBody))
+	return utils.RemoveDuplicateElement(utils.AddToList(telephoneList, utils.RegxResult(constract.TELEPHONE_REGX, responseBody)))
 }
 
 // 收集邮箱
 func collectEmail(emailList []string, responseBody []byte) []string {
-	return utils.AddToList(emailList, utils.RegxResult(constract.EMAIL_REGX, responseBody))
+	return utils.RemoveDuplicateElement(utils.AddToList(emailList, utils.RegxResult(constract.EMAIL_REGX, responseBody)))
 }
 
 // 收集身份证
 func collectPerson(personList []string, responseBody []byte) []string {
-	return utils.AddToList(personList, utils.RegxResult(constract.PERSON_REGX, responseBody))
+	return utils.RemoveDuplicateElement(utils.AddToList(personList, utils.RegxResult(constract.PERSON_REGX, responseBody)))
 }
 
 // 总收集

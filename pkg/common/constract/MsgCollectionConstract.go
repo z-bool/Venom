@@ -1,12 +1,7 @@
 package constract
 
-const GITHUB_HTTPS_REGX = "https://github.com/.*.git"
-const GITHUB_GIT_REGX = "git@github.com:.*.git"
-const GITEE_Https_REGX = "https://gitee.com/.*.git"
-const GITEE_GIT_REGX = "git@gitee.com:.*.git"
-const GITLAB_HTTPS_REGX = "http://.*.git"
-const GITLAB_SSH_REGX = "ssh://git@.*.git"
+const GITHUB_REGX = "(https|http|ssh|git)(://|@)([^\\s]*?)\\.git|(https|http)://git(hub|lib|ee).com/[^\\s]*?/[a-zA-Z0-9_]*"
 
-const TELEPHONE_REGX = "[1][3,4,5,6.7,8,9][0-9]{9}"
+const TELEPHONE_REGX = "1(3\\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\\d|9[0-35-9])\\d{8}"
 const EMAIL_REGX = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"
-const PERSON_REGX = ""
+const PERSON_REGX = "(([1-6][1-9]|50)\\d{4}(18|19|20)\\d{2}((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx])|(([1-6][1-9]|50)\\d{4}\\d{2}((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\\d{3}$)"

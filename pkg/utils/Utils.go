@@ -2,7 +2,9 @@ package utils
 
 import (
 	"bytes"
+	"crypto/md5"
 	"crypto/tls"
+	"encoding/hex"
 	"os"
 	"reflect"
 	"regexp"
@@ -33,7 +35,6 @@ func RegxResult(regx string, body []byte) []string {
 	return regexp.MustCompile(regx).FindAllString(string(body), -1)
 }
 
-// 思路是如果传入的操作为空数组的话直接返回源数组，否则遍历追加并返回新数组
 func AddToList(totalList []string, dealList []string) []string {
 	if len(dealList) == 0 {
 		return totalList
@@ -42,4 +43,23 @@ func AddToList(totalList []string, dealList []string) []string {
 		totalList = append(totalList, val)
 	}
 	return totalList
+}
+
+func Md5To32(str string) string {
+	h := md5.New()
+	h.Write([]byte(str))
+	return hex.EncodeToString(h.Sum(nil))
+}
+
+// 去重
+func RemoveDuplicateElement(arr []string) []string {
+	result := make([]string, 0, len(arr))
+	temp := map[string]struct{}{}
+	for _, item := range arr {
+		if _, ok := temp[item]; !ok {
+			temp[item] = struct{}{}
+			result = append(result, item)
+		}
+	}
+	return result
 }

@@ -5,6 +5,7 @@ import (
 	"flag"
 	Core "github.com/z-bool/Venom/pkg/service/impl"
 	"github.com/z-bool/Venom/pkg/service/impl/Websocket"
+	componets "github.com/z-bool/Venom/pkg/service/impl/components"
 	"io"
 	"log"
 	"net/http"
@@ -46,9 +47,11 @@ func main() {
 		// 	body, _ := io.ReadAll(reader)
 		// 	log.Println("HttpResponseEvent：" + string(body))
 		// }
+
 		reader = bufio.NewReader(response.Body)
 		body, _ := io.ReadAll(reader)
-		log.Println(string(body))
+		Core.CollectMsg(response.Request.Host, body)
+		log.Println(componets.Result)
 	}
 	// 注册socket5服务器推送消息事件函数
 	s.OnSocket5ResponseEvent = func(message []byte) {
