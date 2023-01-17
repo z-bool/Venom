@@ -50,7 +50,7 @@ func main() {
 
 		reader = bufio.NewReader(response.Body)
 		body, _ := io.ReadAll(reader)
-		Core.CollectMsg(response.Request.Host, body)
+		Core.Collect(response.Request.Host, body)
 		log.Println(componets.Result)
 	}
 	// 注册socket5服务器推送消息事件函数

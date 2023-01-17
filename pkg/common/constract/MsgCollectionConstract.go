@@ -1,6 +1,6 @@
 package constract
 
-const GITHUB_REGX = "(https|http|ssh|git)(://|@)([^\\s]*?)\\.git|(https|http)://git(hub|lib|ee).com/[^\\s]*?/[a-zA-Z0-9_]*"
+const GITHUB_REGX = "(https|http|ssh|git)(://|@)([^\\s]*?)\\.git|(https|http)://git(hub|lib|ee).com/[^\\s]*?/[a-zA-Z0-9_-]*"
 
 const TELEPHONE_REGX = "1(3\\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\\d|9[0-35-9])\\d{8}"
 const EMAIL_REGX = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"
