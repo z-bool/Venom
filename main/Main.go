@@ -1,12 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	Core "github.com/z-bool/Venom/pkg/service/impl"
 	"github.com/z-bool/Venom/pkg/service/impl/Websocket"
-	componets "github.com/z-bool/Venom/pkg/service/impl/components"
-	"io"
 	"log"
 	"net/http"
 )
@@ -37,9 +34,7 @@ func main() {
 	}
 	// 注册http服务器响应事件函数
 	s.OnHttpResponseEvent = func(response *http.Response) {
-		//defer response.Body.Close()
 		// contentType := response.Header.Get("Content-Type")
-		var reader io.Reader
 		// if strings.Contains(contentType, "json") {
 		// 	reader = bufio.NewReader(response.Body)
 		// 	if header := response.Header.Get("Content-Encoding"); header == "gzip" {
@@ -49,10 +44,8 @@ func main() {
 		// 	log.Println("HttpResponseEvent：" + string(body))
 		// }
 		if response.StatusCode == http.StatusOK {
-			reader = bufio.NewReader(response.Body)
-			body, _ := io.ReadAll(reader)
-			Core.Collect(response.Request.Host, body)
-			log.Println(componets.Result)
+
+			Core.Collect(response)
 		}
 	}
 	// 注册socket5服务器推送消息事件函数

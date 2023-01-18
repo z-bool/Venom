@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/md5"
 	"crypto/tls"
+	"encoding/base64"
 	"encoding/hex"
 	"os"
 	"reflect"
@@ -53,6 +54,10 @@ func Md5To32(str string) string {
 
 func Md5To16(str string) string {
 	return Md5To32(str)[8:24]
+}
+
+func Base64(str string) string {
+	return base64.StdEncoding.EncodeToString([]byte(str))
 }
 
 // 去重

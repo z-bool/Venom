@@ -4,7 +4,6 @@ import (
 	"github.com/z-bool/Venom/pkg/common/constract"
 	"github.com/z-bool/Venom/pkg/entity"
 	"github.com/z-bool/Venom/pkg/utils"
-	"sync"
 )
 
 var Result = &entity.MsgCollection{
@@ -13,8 +12,6 @@ var Result = &entity.MsgCollection{
 	Emails:     make(map[string][]string),
 	Persons:    make(map[string][]string),
 }
-
-var mu sync.Mutex
 
 // 收集Github地址
 func collectGithubLink(githubList []string, responseBody []byte) []string {
