@@ -51,6 +51,10 @@ func Md5To32(str string) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
+func Md5To16(str string) string {
+	return Md5To32(str)[8:24]
+}
+
 // 去重
 func RemoveDuplicateElement(arr []string) []string {
 	result := make([]string, 0, len(arr))

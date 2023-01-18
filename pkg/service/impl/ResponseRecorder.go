@@ -5,5 +5,5 @@ import (
 )
 
 func Collect(reqUrl string, responseBody []byte) {
-	go componets.CollectMsg(reqUrl, responseBody)
+	componets.CollectMsg(reqUrl, responseBody)
 }

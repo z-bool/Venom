@@ -4,9 +4,9 @@ import (
 	"bufio"
 	"flag"
 	Core "github.com/z-bool/Venom/pkg/service/impl"
-	"github.com/z-bool/Venom/pkg/service/impl/Websocket"
 	componets "github.com/z-bool/Venom/pkg/service/impl/components"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -47,29 +47,30 @@ func main() {
 		// 	body, _ := io.ReadAll(reader)
 		// 	log.Println("HttpResponseEvent：" + string(body))
 		// }
-
-		reader = bufio.NewReader(response.Body)
-		body, _ := io.ReadAll(reader)
-		Core.Collect(response.Request.Host, body)
-		log.Println(componets.Result)
+		if response.StatusCode == http.StatusOK {
+			reader = bufio.NewReader(response.Body)
+			body, _ := ioutil.ReadAll(reader)
+			Core.Collect(response.Request.Host, body)
+			log.Println(componets.Result)
+		}
 	}
 	// 注册socket5服务器推送消息事件函数
-	s.OnSocket5ResponseEvent = func(message []byte) {
-		log.Println("Socket5ResponseEvent：" + string(message))
-	}
+	//s.OnSocket5ResponseEvent = func(message []byte) {
+	//	log.Println("Socket5ResponseEvent：" + string(message))
+	//}
 	// 注册socket5客户端推送消息事件函数
-	s.OnSocket5RequestEvent = func(message []byte) {
-		log.Println("Socket5RequestEvent：" + string(message))
-	}
+	//s.OnSocket5RequestEvent = func(message []byte) {
+	//	log.Println("Socket5RequestEvent：" + string(message))
+	//}
 	// 注册ws客户端推送消息事件函数
-	s.OnWsRequestEvent = func(msgType int, message []byte, target *Websocket.Conn, resolve Core.ResolveWs) error {
-		log.Println("WsRequestEvent：" + string(message))
-		return target.WriteMessage(msgType, message)
-	}
+	//s.OnWsRequestEvent = func(msgType int, message []byte, target *Websocket.Conn, resolve Core.ResolveWs) error {
+	//	log.Println("WsRequestEvent：" + string(message))
+	//	return target.WriteMessage(msgType, message)
+	//}
 	// 注册w服务器推送消息事件函数
-	s.OnWsResponseEvent = func(msgType int, message []byte, client *Websocket.Conn, resolve Core.ResolveWs) error {
-		log.Println("WsResponseEvent：" + string(message))
-		return resolve(msgType, message, client)
-	}
+	//s.OnWsResponseEvent = func(msgType int, message []byte, client *Websocket.Conn, resolve Core.ResolveWs) error {
+	//	log.Println("WsResponseEvent：" + string(message))
+	//	return resolve(msgType, message, client)
+	//}
 	_ = s.Start()
 }
