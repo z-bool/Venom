@@ -4,6 +4,7 @@ import (
 	"github.com/z-bool/Venom/pkg/common/constract"
 	"github.com/z-bool/Venom/pkg/entity"
 	"github.com/z-bool/Venom/pkg/utils"
+	"sync"
 )
 
 var Result = &entity.MsgCollection{
@@ -12,6 +13,8 @@ var Result = &entity.MsgCollection{
 	Emails:     make(map[string][]string),
 	Persons:    make(map[string][]string),
 }
+
+var mu sync.Mutex
 
 // 收集Github地址
 func collectGithubLink(githubList []string, responseBody []byte) []string {
@@ -35,8 +38,22 @@ func collectPerson(personList []string, responseBody []byte) []string {
 
 // 总收集
 func CollectMsg(reqUrl string, responseBody []byte) {
-	Result.Telephones[reqUrl] = collectTelephone(Result.Telephones[reqUrl], responseBody)
-	Result.Githubs[reqUrl] = collectGithubLink(Result.Githubs[reqUrl], responseBody)
-	Result.Persons[reqUrl] = collectPerson(Result.Persons[reqUrl], responseBody)
-	Result.Emails[reqUrl] = collectEmail(Result.Emails[reqUrl], responseBody)
+	mu.Lock()
+	defer mu.Unlock()
+	telephone := collectTelephone(Result.Telephones[reqUrl], responseBody)
+	if len(telephone) != 0 {
+		Result.Telephones[reqUrl] = telephone
+	}
+	github := collectGithubLink(Result.Githubs[reqUrl], responseBody)
+	if len(github) != 0 {
+		Result.Githubs[reqUrl] = github
+	}
+	person := collectPerson(Result.Persons[reqUrl], responseBody)
+	if len(person) != 0 {
+		Result.Persons[reqUrl] = person
+	}
+	email := collectEmail(Result.Emails[reqUrl], responseBody)
+	if len(email) != 0 {
+		Result.Emails[reqUrl] = email
+	}
 }

@@ -334,6 +334,9 @@ func (i *ProxyHttp) handleWsShakehandErr(rawProtolInput []byte) {
 
 // 处理ws请求
 func (i *ProxyHttp) handleWsRequest() bool {
+	if i.server == nil {
+		panic(any("server nil"))
+	}
 	if i.request.Header.Get("Upgrade") == "" {
 		return false
 	}
@@ -426,6 +429,9 @@ func (i *ProxyHttp) handleWsRequest() bool {
 				break
 			}
 			err = i.server.OnWsRequestEvent(msgType, message, targetWsConn, func(msgType int, message []byte, wsConn *Websocket.Conn) error {
+				if wsConn == nil {
+					panic("wsconn nil")
+				}
 				return wsConn.WriteMessage(msgType, message)
 			})
 			if err != nil {

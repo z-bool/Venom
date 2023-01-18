@@ -4,9 +4,9 @@ import (
 	"bufio"
 	"flag"
 	Core "github.com/z-bool/Venom/pkg/service/impl"
+	"github.com/z-bool/Venom/pkg/service/impl/Websocket"
 	componets "github.com/z-bool/Venom/pkg/service/impl/components"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -37,6 +37,7 @@ func main() {
 	}
 	// 注册http服务器响应事件函数
 	s.OnHttpResponseEvent = func(response *http.Response) {
+		//defer response.Body.Close()
 		// contentType := response.Header.Get("Content-Type")
 		var reader io.Reader
 		// if strings.Contains(contentType, "json") {
@@ -49,7 +50,7 @@ func main() {
 		// }
 		if response.StatusCode == http.StatusOK {
 			reader = bufio.NewReader(response.Body)
-			body, _ := ioutil.ReadAll(reader)
+			body, _ := io.ReadAll(reader)
 			Core.Collect(response.Request.Host, body)
 			log.Println(componets.Result)
 		}
@@ -63,14 +64,14 @@ func main() {
 	//	log.Println("Socket5RequestEvent：" + string(message))
 	//}
 	// 注册ws客户端推送消息事件函数
-	//s.OnWsRequestEvent = func(msgType int, message []byte, target *Websocket.Conn, resolve Core.ResolveWs) error {
-	//	log.Println("WsRequestEvent：" + string(message))
-	//	return target.WriteMessage(msgType, message)
-	//}
+	s.OnWsRequestEvent = func(msgType int, message []byte, target *Websocket.Conn, resolve Core.ResolveWs) error {
+		//log.Println("WsRequestEvent：" + string(message))
+		return target.WriteMessage(msgType, message)
+	}
 	// 注册w服务器推送消息事件函数
-	//s.OnWsResponseEvent = func(msgType int, message []byte, client *Websocket.Conn, resolve Core.ResolveWs) error {
-	//	log.Println("WsResponseEvent：" + string(message))
-	//	return resolve(msgType, message, client)
-	//}
+	s.OnWsResponseEvent = func(msgType int, message []byte, client *Websocket.Conn, resolve Core.ResolveWs) error {
+		//log.Println("WsResponseEvent：" + string(message))
+		return resolve(msgType, message, client)
+	}
 	_ = s.Start()
 }
