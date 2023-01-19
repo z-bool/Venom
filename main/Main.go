@@ -30,7 +30,7 @@ func main() {
 	s := Core.NewProxyServer(*port, *nagle, *proxy)
 	// 注册http客户端请求事件函数
 	s.OnHttpRequestEvent = func(request *http.Request) {
-		// log.Println(request)
+		//log.Println(request.URL.String())
 	}
 	// 注册http服务器响应事件函数
 	s.OnHttpResponseEvent = func(response *http.Response) {

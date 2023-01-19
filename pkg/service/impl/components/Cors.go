@@ -33,7 +33,7 @@ func Cors(res *http.Response, responseBody []byte) {
 	if res.Header.Get(constract.HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS) == "true" && res.Header.Get(constract.HEADER_ACCESS_CONTROL_ALLOW_ORIGIN) != "" {
 		uri := entity.URL{
 			Domain:          res.Request.Host,
-			Url:             req.URL.RequestURI(),
+			Url:             req.URL.Path,
 			Title:           title,
 			ResponseHeaders: headers,
 		}

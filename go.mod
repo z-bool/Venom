@@ -2,7 +2,35 @@ module github.com/z-bool/Venom
 
 go 1.19
 
-require github.com/projectdiscovery/goflags v0.1.6
+require (
+	github.com/hahwul/dalfox/v2 v2.8.2
+	github.com/projectdiscovery/goflags v0.1.6
+)
+
+require (
+	github.com/PuerkitoBio/goquery v1.8.0 // indirect
+	github.com/andybalholm/cascadia v1.3.1 // indirect
+	github.com/antonfisher/nested-logrus-formatter v1.3.1 // indirect
+	github.com/briandowns/spinner v1.19.0 // indirect
+	github.com/chromedp/cdproto v0.0.0-20220827030233-358ed4af73cf // indirect
+	github.com/chromedp/chromedp v0.8.5 // indirect
+	github.com/chromedp/sysutil v1.0.0 // indirect
+	github.com/fatih/color v1.13.0 // indirect
+	github.com/gobwas/httphead v0.1.0 // indirect
+	github.com/gobwas/pool v0.2.1 // indirect
+	github.com/gobwas/ws v1.1.0 // indirect
+	github.com/hahwul/volt v1.0.5 // indirect
+	github.com/josharian/intern v1.0.0 // indirect
+	github.com/logrusorgru/aurora v2.0.3+incompatible // indirect
+	github.com/mailru/easyjson v0.7.7 // indirect
+	github.com/mattn/go-colorable v0.1.12 // indirect
+	github.com/mattn/go-isatty v0.0.14 // indirect
+	github.com/mattn/go-runewidth v0.0.9 // indirect
+	github.com/olekukonko/tablewriter v0.0.5 // indirect
+	github.com/rogpeppe/go-internal v1.9.0 // indirect
+	github.com/sirupsen/logrus v1.9.0 // indirect
+	golang.org/x/term v0.1.0 // indirect
+)
 
 require (
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
