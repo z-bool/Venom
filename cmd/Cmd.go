@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/z-bool/Venom/pkg/entity"
+	"github.com/z-bool/Venom/internal/entity"
 )
 
 func Execute() entity.CmdOptions {

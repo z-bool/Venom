@@ -1,9 +1,9 @@
 package componets
 
 import (
-	"github.com/z-bool/Venom/pkg/common/constract"
-	"github.com/z-bool/Venom/pkg/entity"
-	"github.com/z-bool/Venom/pkg/utils"
+	"github.com/z-bool/Venom/internal/common/constract"
+	"github.com/z-bool/Venom/internal/entity"
+	"github.com/z-bool/Venom/internal/utils"
 	"net/http"
 )
 

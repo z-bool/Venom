@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	Core "github.com/z-bool/Venom/pkg/service/impl"
-	"github.com/z-bool/Venom/pkg/service/impl/Websocket"
+	Core "github.com/z-bool/Venom/internal/service/impl"
+	"github.com/z-bool/Venom/internal/service/impl/Websocket"
 	"log"
 	"net/http"
 )
@@ -30,7 +30,7 @@ func main() {
 	s := Core.NewProxyServer(*port, *nagle, *proxy)
 	// 注册http客户端请求事件函数
 	s.OnHttpRequestEvent = func(request *http.Request) {
-		//log.Println(request.URL.String())
+		Core.HookRequest(request)
 	}
 	// 注册http服务器响应事件函数
 	s.OnHttpResponseEvent = func(response *http.Response) {

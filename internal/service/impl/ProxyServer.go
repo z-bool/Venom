@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/viki-org/dnscache"
-	"github.com/z-bool/Venom/pkg/service"
-	"github.com/z-bool/Venom/pkg/service/impl/Websocket"
+	"github.com/z-bool/Venom/internal/service"
+	"github.com/z-bool/Venom/internal/service/impl/Websocket"
 )
 
 type HttpRequestEvent func(request *http.Request)

@@ -13,7 +13,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/z-bool/Venom/pkg/utils"
+	"github.com/z-bool/Venom/internal/utils"
 )
 
 var Cert *Certificate

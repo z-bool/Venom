@@ -17,8 +17,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/z-bool/Venom/pkg/service/impl/Websocket"
-	"github.com/z-bool/Venom/pkg/utils"
+	"github.com/z-bool/Venom/internal/service/impl/Websocket"
+	"github.com/z-bool/Venom/internal/utils"
 )
 
 const ConnectSuccess = "HTTP/1.1 200 Connection Established\r\n\r\n"

@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/hahwul/dalfox/v2 v2.8.2
+	github.com/jmoiron/sqlx v1.3.5
 	github.com/projectdiscovery/goflags v0.1.6
 )
 

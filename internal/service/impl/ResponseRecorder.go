@@ -1,8 +1,6 @@
 package Core
 
 import (
-	componets "github.com/z-bool/Venom/pkg/service/impl/components"
-	"log"
 	"net/http"
 )
 
@@ -22,12 +20,10 @@ func Collect(response *http.Response) {
 	//var reader io.Reader
 	//reader = bufio.NewReader(response.Body)
 	//body, _ := io.ReadAll(reader)
-	//componets.CollectMsg(response.Request.Host, body)
+	//go componets.CollectMsg(response.Request.Host, body)
 	//componets.Cors(response, body)
-	//componets.CheckWeakPassword(response)
-	log.Println(response.Request.URL.String())
-	go componets.CheckXSS(response)
-	Print()
+	//go componets.CheckXSS(response)
+	//Print()
 }
 
 func Print() {

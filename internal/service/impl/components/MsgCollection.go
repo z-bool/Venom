@@ -1,9 +1,9 @@
 package componets
 
 import (
-	"github.com/z-bool/Venom/pkg/common/constract"
-	"github.com/z-bool/Venom/pkg/entity"
-	"github.com/z-bool/Venom/pkg/utils"
+	"github.com/z-bool/Venom/internal/common/constract"
+	"github.com/z-bool/Venom/internal/entity"
+	"github.com/z-bool/Venom/internal/utils"
 )
 
 var Result = &entity.MsgCollection{
@@ -35,8 +35,8 @@ func collectPerson(personList []string, responseBody []byte) []string {
 
 // 总收集
 func CollectMsg(reqUrl string, responseBody []byte) {
-	mu.Lock()
-	defer mu.Unlock()
+	//mu.Lock()
+	//defer mu.Unlock()
 	telephone := collectTelephone(Result.Telephones[reqUrl], responseBody)
 	if len(telephone) != 0 {
 		Result.Telephones[reqUrl] = telephone

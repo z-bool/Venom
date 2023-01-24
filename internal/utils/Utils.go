@@ -36,6 +36,18 @@ func RegxResult(regx string, body []byte) []string {
 	return regexp.MustCompile(regx).FindAllString(string(body), -1)
 }
 
+func RegxRequest(regx string, data string) bool {
+	return regexp.MustCompile(regx).MatchString(data)
+}
+
+func RegxFormData(regx string, replaceRegx string, data string) string {
+	strings := regexp.MustCompile(regx).FindAllString(data, -1)
+	if len(strings) != 0 {
+		return regexp.MustCompile(replaceRegx).ReplaceAllString(strings[0], "")
+	}
+	return ""
+}
+
 func AddToList(totalList []string, dealList []string) []string {
 	if len(dealList) == 0 {
 		return totalList
